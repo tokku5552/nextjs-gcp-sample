@@ -3,12 +3,13 @@
 import { css } from "@/styled-system/css";
 import { vstack, hstack } from "@/styled-system/patterns";
 import { Todo } from "@prisma/client";
-import { Suspense, useEffect, useState } from "react";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const { handleSubmit, register, formState } = useForm();
+  const { handleSubmit, register, formState } = useForm<{ title: string }>();
   useEffect(() => {
     (async () => {
       const res = await fetch("/api/todo", {
@@ -36,7 +37,12 @@ export default function Home() {
       <div className={vstack({ padding: "8" })}>
         <form
           onSubmit={handleSubmit(async (value) => {
-            console.log(value);
+            const res = await fetch("/api/todo", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(value),
+            });
+            console.log(res);
           })}
         >
           <div className={hstack({})}>
@@ -71,7 +77,11 @@ export default function Home() {
 
         {!formState.isLoading &&
           todos &&
-          todos.map((todo) => <div key={todo.id}>{todo.title}</div>)}
+          todos.map((todo) => (
+            <div key={todo.id}>
+              <Link href={`/todo/${todo.id}`}>{todo.title}</Link>
+            </div>
+          ))}
       </div>
     </main>
   );
