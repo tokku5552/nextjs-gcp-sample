@@ -1,7 +1,7 @@
 resource "google_compute_network" "vpc" {
-  name = "${var.environment}-${var.project}-vpc"
+  name                    = "${var.environment}-${var.project}-vpc"
   auto_create_subnetworks = false
-  routing_mode = "REGIONAL"
+  routing_mode            = "REGIONAL"
 }
 
 resource "google_compute_subnetwork" "private" {
