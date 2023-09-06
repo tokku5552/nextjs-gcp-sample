@@ -4,7 +4,7 @@ variable "region" {
   default = "asia-northeast1"
 }
 variable "environment" {
-  default = "backend"
+  default = "artifact-registry"
 }
 variable "project" {
   default = "nextjs-gcp-sample"
