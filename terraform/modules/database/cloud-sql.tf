@@ -11,7 +11,7 @@ resource "google_sql_database_instance" "db" {
     disk_type         = "PD_SSD"
 
     ip_configuration {
-      private_network = var.vpc_name
+      private_network = var.vpc_private_link
       ipv4_enabled    = "true"
     }
   }

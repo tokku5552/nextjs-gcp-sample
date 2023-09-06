@@ -3,4 +3,4 @@ variable "region" {}
 variable "environment" {}
 variable "project" {}
 
-variable "vpc_name" {}
+variable "vpc_private_link" {}

@@ -5,3 +5,7 @@ output "vpc_name" {
 output "vpc_id" {
   value = google_compute_network.vpc.id
 }
+
+output "private_network_link"{
+  value = google_compute_network.vpc.self_link
+}
