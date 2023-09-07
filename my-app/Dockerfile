@@ -8,13 +8,15 @@ ENV DATABASE_URL=$database_url
 
 WORKDIR /app
 COPY package.json ./
+COPY panda.config.ts ./
+COPY postcss.config.cjs ./
 COPY yarn.lock ./
 RUN yarn install
 COPY . .
 RUN yarn build
 
 
-FROM node:18-stretch-slim AS runner
+FROM node:18-slim AS runner
 ENV NODE_ENV=production
 
 WORKDIR /app
