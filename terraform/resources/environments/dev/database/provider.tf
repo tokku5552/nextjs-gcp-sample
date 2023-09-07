@@ -8,7 +8,7 @@ terraform {
 
   backend "gcs" {
     bucket = "de6f0fe9cb3c1724-bucket-tfstate"
-    prefix = "database"
+    prefix = "dev/database"
   }
 }
 

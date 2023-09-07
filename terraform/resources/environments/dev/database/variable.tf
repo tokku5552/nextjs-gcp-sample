@@ -4,8 +4,10 @@ variable "region" {
   default = "asia-northeast1"
 }
 variable "environment" {
-  default = "database"
+  default = "dev"
 }
 variable "project" {
   default = "nextjs-gcp-sample"
 }
+
+variable "db_password" {}

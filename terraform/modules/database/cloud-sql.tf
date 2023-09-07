@@ -28,3 +28,10 @@ resource "google_sql_database" "db" {
   instance = google_sql_database_instance.db.name
 
 }
+
+resource "google_sql_user" "db" {
+  name     = "${var.environment}-${var.project}-db-user"
+  instance = google_sql_database_instance.db.name
+  host     = "%"
+  password = var.db_password
+}
