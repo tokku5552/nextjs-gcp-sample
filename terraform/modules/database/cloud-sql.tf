@@ -11,12 +11,13 @@ resource "google_sql_database_instance" "db" {
     disk_type         = "PD_SSD"
 
     ip_configuration {
-      private_network = var.vpc_private_link
-      ipv4_enabled    = "true"
+      private_network = var.vpc_private_link # Use Private IP
+      ipv4_enabled    = false                # Disable public IP
     }
 
+    # Only Standalone Instance for HA enabled
     backup_configuration {
-      enabled = true
+      enabled            = true
       binary_log_enabled = true
     }
   }
