@@ -14,10 +14,16 @@ resource "google_sql_database_instance" "db" {
       private_network = var.vpc_private_link
       ipv4_enabled    = "true"
     }
+
+    backup_configuration {
+      enabled = true
+      binary_log_enabled = true
+    }
   }
 }
 
 resource "google_sql_database" "db" {
   name     = "${var.environment}-${var.project}-db"
   instance = google_sql_database_instance.db.name
+
 }

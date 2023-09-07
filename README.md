@@ -2,6 +2,7 @@
 
 ```bash:
 gcloud init
+gcloud auth login
 gcloud projects list
 gcloud auth application-default login
 
