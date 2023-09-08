@@ -10,6 +10,7 @@ gcloud auth application-default login
 gcloud services enable storage.googleapis.com
 gcloud services enable artifactregistry.googleapis.com
 gcloud services enable cloudbuild.googleapis.com
+gcloud services enable run.googleapis.com
 
 gsutil ls
 gsutil mb gs://BUCKET_NAME

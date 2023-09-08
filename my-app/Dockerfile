@@ -27,4 +27,7 @@ RUN yarn install
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
-CMD ["yarn", "start"]
+EXPOSE 3000
+ENV PORT 3000
+COPY ./start.sh ./
+CMD ["./start.sh"]

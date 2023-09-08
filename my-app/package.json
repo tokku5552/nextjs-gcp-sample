@@ -9,6 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "export": "next build && next export",
+    "db:generate": "prisma generate",
     "db:migrate": "prisma migrate dev",
     "db:migrate:reset": "prisma migrate reset",
     "db:seed": "prisma db seed",
@@ -26,11 +27,11 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.46.1",
+    "prisma": "^5.2.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {
     "@pandacss/dev": "^0.13.1",
-    "prisma": "^5.2.0",
     "ts-node": "^10.9.1"
   },
   "prisma": {
