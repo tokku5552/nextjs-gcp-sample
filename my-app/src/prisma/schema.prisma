@@ -10,18 +10,9 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  todos  Todo[]
-}
-
 model Todo{
   id Int @id @default(autoincrement())
   title String
   description String
   status Boolean @default(false)
-  user User? @relation(fields: [userId], references: [id])
-  userId Int?
 }
