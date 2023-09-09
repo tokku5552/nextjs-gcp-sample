@@ -1,9 +1,8 @@
 import { prisma } from "@/prisma";
-import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
-export async function GET(request: NextApiRequest) {
-  const id = parseInt(request.query.id as string);
+export async function GET(_: Request, { params }: { params: { id: string } }) {
+  const id = Number(params.id);
   const todo = await prisma.todo.findUnique({ where: { id } });
   return NextResponse.json({ todo });
 }

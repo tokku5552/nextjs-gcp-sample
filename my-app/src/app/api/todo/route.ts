@@ -14,7 +14,6 @@ export async function POST(request: Request) {
       title: body.title,
       description: "",
       status: false,
-      userId: 1,
     },
   });
   return NextResponse.json({ todo });

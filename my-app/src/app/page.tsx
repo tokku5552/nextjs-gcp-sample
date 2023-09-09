@@ -1,27 +1,17 @@
 "use client";
 
+import { useGetTodos } from "@/hooks/useGetTodos";
 import { css } from "@/styled-system/css";
 import { vstack, hstack } from "@/styled-system/patterns";
-import { Todo } from "@prisma/client";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function Home() {
-  const [todos, setTodos] = useState<Todo[]>([]);
   const { handleSubmit, register, formState } = useForm<{ title: string }>();
-  useEffect(() => {
-    (async () => {
-      const res = await fetch("/api/todo", {
-        method: "GET",
-        headers: { "Content-Type": "application/json" },
-      });
-      const data = await res.json();
+  const { todos, isLoading, error, mutate } = useGetTodos();
 
-      setTodos(data.todos);
-    })();
-  }, []);
-
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>{error.message}</div>;
   return (
     <main>
       <div
@@ -43,6 +33,7 @@ export default function Home() {
               body: JSON.stringify(value),
             });
             console.log(res);
+            mutate();
           })}
         >
           <div className={hstack({})}>
