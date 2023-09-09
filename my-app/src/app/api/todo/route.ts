@@ -1,6 +1,8 @@
 import { prisma } from "@/prisma";
 import { NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(_: Request) {
   const todos = await prisma.todo.findMany();
   return NextResponse.json({ todos });
@@ -17,10 +19,3 @@ export async function POST(request: Request) {
   });
   return NextResponse.json({ todo });
 }
-
-export const config = {
-  api: {
-    bodyParser: true,
-  },
-  dynamic: "force-dynamic",
-};
