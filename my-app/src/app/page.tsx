@@ -18,7 +18,7 @@ export default function Home() {
         className={css({
           fontSize: "2xl",
           fontWeight: "bold",
-          alignItems: "center",
+          textAlign: "center",
         })}
       >
         Todo App
