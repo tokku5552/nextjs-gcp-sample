@@ -1,8 +1,7 @@
 import { prisma } from "@/prisma";
-import { NextApiRequest } from "next";
 import { NextResponse } from "next/server";
 
-export async function GET(_: NextApiRequest) {
+export async function GET(_: Request) {
   const todos = await prisma.todo.findMany();
   return NextResponse.json({ todos });
 }
