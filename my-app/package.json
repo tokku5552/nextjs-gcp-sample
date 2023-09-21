@@ -28,6 +28,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.46.1",
     "prisma": "^5.2.0",
+    "swr": "^2.2.2",
     "typescript": "5.2.2"
   },
   "devDependencies": {
