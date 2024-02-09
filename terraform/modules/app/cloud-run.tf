@@ -1,33 +1,34 @@
-resource "google_cloud_run_service" "app" {
-  name                       = "app"
-  location                   = var.region
-  autogenerate_revision_name = true
+resource "google_cloud_run_v2_service" "app" {
+  name     = "app"
+  location = var.region
 
   template {
-    spec {
-      timeout_seconds       = 300
-      container_concurrency = 50
-      containers {
-        image = var.image_name
-        resources {
-          limits = {
-            "memory" : "256Mi",
-            "cpu" : "1"
-          }
-        }
-        ports {
-          container_port = 3000
+    timeout                          = 300
+    max_instance_request_concurrency = 50
+
+    containers {
+      image = var.image_name
+      resources {
+        limits = {
+          "memory" : "256Mi",
+          "cpu" : "1"
         }
       }
+      ports {
+        container_port = 3000
+      }
     }
-    metadata {
-      annotations = {
-        "autoscaling.knative.dev/minScale" = "0"
-        "autoscaling.knative.dev/maxScale" = "5"
-        "run.googleapis.com/cloudsql-instances" = var.db_connection_name
+
+    scaling {
+      min_instance_count = 0
+      max_instance_count = 5
+    }
+
+    volumes {
+      name = "cloudsql-instance-connection"
+      cloud_sql_instance {
+        instances = [var.db_connection_name]
       }
     }
   }
-
-  
 }
