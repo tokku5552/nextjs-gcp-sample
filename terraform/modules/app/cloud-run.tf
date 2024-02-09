@@ -3,14 +3,14 @@ resource "google_cloud_run_v2_service" "app" {
   location = var.region
 
   template {
-    timeout                          = 300
+    timeout                          = "300s"
     max_instance_request_concurrency = 50
 
     containers {
       image = var.image_name
       resources {
         limits = {
-          "memory" : "256Mi",
+          "memory" : "512Mi",
           "cpu" : "1"
         }
       }
@@ -25,7 +25,7 @@ resource "google_cloud_run_v2_service" "app" {
     }
 
     volumes {
-      name = "cloudsql-instance-connection"
+      name = "cloudsql"
       cloud_sql_instance {
         instances = [var.db_connection_name]
       }
