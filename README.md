@@ -4,6 +4,7 @@
 gcloud init
 gcloud auth login
 gcloud projects list
+gcloud config set project PROJECT_ID
 gcloud auth application-default login
 
 # enable API

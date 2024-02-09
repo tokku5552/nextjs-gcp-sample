@@ -1,4 +1,4 @@
-FROM node:18 AS builder
+FROM node:20.11.0-alpine as builder
 
 ARG database_url
 
@@ -16,18 +16,18 @@ COPY . .
 RUN yarn build
 
 
-FROM node:18-slim AS runner
+FROM node:20.11.0-alpine as runner
 ENV NODE_ENV=production
 
 WORKDIR /app
-COPY ./package.json ./
-COPY ./yarn.lock ./
 
-RUN yarn install
 COPY --from=builder /app/next.config.js ./
-COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+
 EXPOSE 3000
 ENV PORT 3000
-COPY ./start.sh ./
-CMD ["./start.sh"]
+ENV HOSTNAME "0.0.0.0"
+
+CMD ["node", "server.js"]
