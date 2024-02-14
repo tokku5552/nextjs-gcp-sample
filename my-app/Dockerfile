@@ -13,6 +13,7 @@ COPY ./postcss.config.cjs ./
 COPY ./yarn.lock ./
 RUN yarn install
 COPY . .
+RUN yarn prisma generate
 RUN yarn build
 
 

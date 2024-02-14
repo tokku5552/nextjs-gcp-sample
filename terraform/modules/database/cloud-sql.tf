@@ -10,10 +10,11 @@ resource "google_sql_database_instance" "db" {
     disk_size         = "20"
     disk_type         = "PD_SSD"
 
-    ip_configuration {
-      private_network = var.vpc_private_link # Use Private IP
-      ipv4_enabled    = false                # Disable public IP
-    }
+    # public IPでの接続の場合は不要
+    # ip_configuration {
+    #   private_network = var.vpc_private_link
+    #   ipv4_enabled    = true                
+    # }
 
     # Only Standalone Instance for HA enabled
     backup_configuration {
