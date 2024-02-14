@@ -1,5 +1,7 @@
 # nextjs-gcp-sample
 
+![image](./docs/architecture.drawio.png)
+
 ```bash:
 gcloud init
 gcloud auth login
