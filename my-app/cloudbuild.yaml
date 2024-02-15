@@ -10,7 +10,7 @@ steps:
         "asia-northeast1-docker.pkg.dev/$PROJECT_ID/artifact-registry-nextjs-gcp-sample-app/console:latest",
         "-f",
         "./Dockerfile",
-        "--push"
+        "--push",
         ".",
       ]
     dir: "my-app"
