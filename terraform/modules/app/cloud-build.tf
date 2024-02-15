@@ -36,13 +36,13 @@ resource "google_project_iam_member" "cloudbuild_iam" {
 #   ]
 # }
 
-resource "google_cloud_run_service_iam_member" "cloudbuild_iam" {
-  location = var.region
-  project = var.project_id
-  service = google_cloud_run_v2_service.app.name
-  role    = "roles/run.admin"
-  member  = "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com"
-}
+# resource "google_cloud_run_service_iam_member" "cloudbuild_iam" {
+#   location = var.region
+#   project = var.project_id
+#   service = google_cloud_run_v2_service.app.name
+#   role    = "roles/run.admin"
+#   member  = "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com"
+# }
 
 resource "google_cloudbuild_trigger" "github_trigger" {
     location = var.region
