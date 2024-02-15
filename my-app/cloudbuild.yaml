@@ -1,0 +1,19 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "buildx",
+        "build",
+        "--platform",
+        "linux/amd64",
+        "-t",
+        "asia-northeast1-docker.pkg.dev/$PROJECT_ID/artifact-registry-nextjs-gcp-sample-app/console:latest",
+        "-f",
+        "./Dockerfile",
+        "--push"
+        ".",
+      ]
+    dir: "my-app"
+    automapSubstitutions: true
+images:
+  - "asia-northeast1-docker.pkg.dev/$PROJECT_ID/artifact-registry-nextjs-gcp-sample-app/console:latest"
