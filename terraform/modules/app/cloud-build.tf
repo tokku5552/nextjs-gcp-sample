@@ -33,8 +33,7 @@ resource "google_cloudbuild_trigger" "my-app_trigger" {
   repository_event_config {
     repository = google_cloudbuildv2_repository.github_repository.id
     push {
-      # branch = "^main$"
-      branch = ".*"
+      branch = "^main$"
     }
   }
   filename = "my-app/cloudbuild.yaml"
