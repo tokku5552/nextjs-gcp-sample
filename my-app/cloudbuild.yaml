@@ -20,10 +20,10 @@ steps:
     args:
       - "run"
       - "deploy"
-      - "app2"
+      - "app"
       - "--image"
       - "asia-northeast1-docker.pkg.dev/$PROJECT_ID/artifact-registry-nextjs-gcp-sample-app/console:latest"
       - "--region"
-      - "ap-northeast1"
+      - "asia-northeast1"
 images:
   - "asia-northeast1-docker.pkg.dev/$PROJECT_ID/artifact-registry-nextjs-gcp-sample-app/console:latest"
