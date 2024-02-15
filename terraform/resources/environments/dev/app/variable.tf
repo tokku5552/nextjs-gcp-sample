@@ -11,3 +11,6 @@ variable "project" {
 }
 
 variable "image_name" {}
+variable "github_app_installation_id" {}
+variable "github_oauth_token_secret_version" {}
+

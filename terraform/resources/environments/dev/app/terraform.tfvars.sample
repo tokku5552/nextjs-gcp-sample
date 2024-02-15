@@ -1,2 +1,4 @@
 project_id = "your project id"
 image_name = "your image name"
+github_app_installation_id = "your github_app_installation_id"
+github_oauth_token_secret_version = "your github_oauth_token_secret_version" 
