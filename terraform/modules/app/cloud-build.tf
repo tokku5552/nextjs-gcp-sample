@@ -26,24 +26,23 @@ resource "google_project_iam_member" "cloudbuild_iam" {
   project = var.project_id
 }
 
-resource "google_service_account_iam_binding" "name" {
-  service_account_id = "projects/${var.project_id}/serviceAccounts/${var.project_number}-compute@developer.gserviceaccount.com"
-  role = "roles/iam.serviceAccountUser"
+# resource "google_service_account_iam_binding" "name" {
+#   # service_account_id = "projects/${var.project_id}/serviceAccounts/${var.project_number}-run@developer.gserviceaccount.com"
+#   service_account_id = google_cloud_run_v2_service.app.template[0].service_account
+#   role = "roles/iam.serviceAccountUser"
 
-  members = [
-    "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com"
-  ]
-}
-
-# resource "google_cloud_run_service_iam_member" "cloudbuild_iam" {
-#   location = var.region
-#   project = var.project_id
-#   service = google_cloud_run_service.app.name
-#   role    = "roles/run.invoker"
-#   member  = "serviceAccount:${
-#     google_cloudbuildv2_connection.github_connection.service_account_email
-#   }"
+#   members = [
+#     "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com"
+#   ]
 # }
+
+resource "google_cloud_run_service_iam_member" "cloudbuild_iam" {
+  location = var.region
+  project = var.project_id
+  service = google_cloud_run_v2_service.app.name
+  role    = "roles/run.admin"
+  member  = "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com"
+}
 
 resource "google_cloudbuild_trigger" "github_trigger" {
     location = var.region
