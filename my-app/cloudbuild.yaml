@@ -15,5 +15,15 @@ steps:
       ]
     dir: "my-app"
     automapSubstitutions: true
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "app"
+      - "--image"
+      - "asia-northeast1-docker.pkg.dev/$PROJECT_ID/artifact-registry-nextjs-gcp-sample-app/console:latest"
+      - "--region"
+      - "ap-northeast1"
 images:
   - "asia-northeast1-docker.pkg.dev/$PROJECT_ID/artifact-registry-nextjs-gcp-sample-app/console:latest"
