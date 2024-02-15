@@ -2,9 +2,9 @@ steps:
   - name: "gcr.io/cloud-builders/docker"
     entrypoint: "bash"
     args:
-      - "-c"
+      - -c
       - >-
-        docker build buildx
+        docker buildx build
         --platform linux/amd64
         --build-arg DATABASE_URL=$$DATABASE_URL
         --tag $_ARTIFACT_REPOSITORY_IMAGE_NAME:$SHORT_SHA
