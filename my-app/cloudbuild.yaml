@@ -4,19 +4,7 @@ steps:
     args:
       [
         "-c",
-        "docker",
-        "buildx",
-        "build",
-        "--platform",
-        "linux/amd64",
-        "--build-arg",
-        "DATABASE_URL=$$DATABASE_URL",
-        "-t",
-        "$_ARTIFACT_REPOSITORY_IMAGE_NAME:latest",
-        "-f",
-        "./Dockerfile",
-        "--push",
-        ".",
+        "docker buildx build --platform linux/amd64 -t $_ARTIFACT_REPOSITORY_IMAGE_NAME:latest -f ./Dockerfile --push .",
       ]
     dir: "my-app"
     automapSubstitutions: true
