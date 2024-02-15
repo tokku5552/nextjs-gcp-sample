@@ -1,3 +1,8 @@
+data "google_secret_manager_secret_version" "database_url" {
+  secret  = "DATABASE_URL"
+  version = "latest"
+}
+
 resource "google_cloud_run_v2_service" "app" {
   name     = "app"
   location = var.region
@@ -17,6 +22,11 @@ resource "google_cloud_run_v2_service" "app" {
       ports {
         container_port = 3000
       }
+
+      env{
+        name = "DATABASE_URL"
+        value = data.google_secret_manager_secret_version.database_url.secret_data
+      }
     }
 
     scaling {
@@ -31,4 +41,13 @@ resource "google_cloud_run_v2_service" "app" {
       }
     }
   }
+
+  lifecycle {
+    ignore_changes = [
+      client,
+      client_version,
+      template[0].containers[0].image,
+    ]
+  }
 }
+
