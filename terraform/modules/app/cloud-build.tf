@@ -16,6 +16,16 @@ resource "google_cloudbuildv2_repository" "github_repository" {
   remote_uri = var.github_repository_remote_uri
 }
 
+resource "google_project_iam_member" "cloudbuild_iam" {
+  for_each = toset([
+    "roles/run.admin",
+    "roles/iam.serviceAccountUser"
+  ])
+  role    = each.key
+  member  = "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com"
+  project = var.project_id
+}
+
 resource "google_cloudbuild_trigger" "github_trigger" {
     location = var.region
   project = var.project_id
