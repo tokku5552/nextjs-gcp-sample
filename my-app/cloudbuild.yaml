@@ -3,6 +3,7 @@ steps:
     entrypoint: "bash"
     args:
       [
+        "-c",
         "docker",
         "buildx",
         "build",
