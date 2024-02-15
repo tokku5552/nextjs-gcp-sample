@@ -26,32 +26,28 @@ resource "google_project_iam_member" "cloudbuild_iam" {
   project = var.project_id
 }
 
-# resource "google_service_account_iam_binding" "name" {
-#   # service_account_id = "projects/${var.project_id}/serviceAccounts/${var.project_number}-run@developer.gserviceaccount.com"
-#   service_account_id = google_cloud_run_v2_service.app.template[0].service_account
-#   role = "roles/iam.serviceAccountUser"
-
-#   members = [
-#     "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com"
-#   ]
-# }
-
-# resource "google_cloud_run_service_iam_member" "cloudbuild_iam" {
-#   location = var.region
-#   project = var.project_id
-#   service = google_cloud_run_v2_service.app.name
-#   role    = "roles/run.admin"
-#   member  = "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com"
-# }
-
-resource "google_cloudbuild_trigger" "github_trigger" {
+resource "google_cloudbuild_trigger" "my-app_trigger" {
     location = var.region
   project = var.project_id
   repository_event_config {
     repository = google_cloudbuildv2_repository.github_repository.id
     push {
-      branch = "^main$"
+      # branch = "^main$"
+      branch = ".*"
     }
   }
   filename = "my-app/cloudbuild.yaml"
+
+  substitutions = {
+    _REGION                         = var.region
+    _ARTIFACT_REPOSITORY_IMAGE_NAME = "${var.region}-docker.pkg.dev/${var.project_id}/artifact-registry-nextjs-gcp-sample-app/console"
+  }
+}
+
+resource "google_secret_manager_secret" "database_url" {
+  secret_id = "DATABASE_URL"
+
+  replication {
+    auto {}
+  }
 }
