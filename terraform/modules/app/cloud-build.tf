@@ -19,7 +19,8 @@ resource "google_cloudbuildv2_repository" "github_repository" {
 resource "google_project_iam_member" "cloudbuild_iam" {
   for_each = toset([
     "roles/run.admin",
-    "roles/iam.serviceAccountUser"
+    "roles/iam.serviceAccountUser",
+    "roles/secretmanager.secretAccessor",
   ])
   role    = each.key
   member  = "serviceAccount:${var.project_number}@cloudbuild.gserviceaccount.com"
